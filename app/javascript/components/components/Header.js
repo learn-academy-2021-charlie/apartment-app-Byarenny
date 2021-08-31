@@ -9,6 +9,7 @@ class Header extends Component {
     } = this.props
     return (
       <>
+        <h1>This is the header</h1>
         <header>
           <ul>
             {logged_in &&
