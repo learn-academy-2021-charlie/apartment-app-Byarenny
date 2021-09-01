@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { Nav, NavLink } from 'reactstrap';
 
 class Footer extends Component {
   render() {
     return (
       <>
-        <h2>This is the Footer</h2>
+        <footer className="footer">
+          <p>&copy; 2021 Yarenny Baez</p>
+        </footer>
       </>
     );
   }
