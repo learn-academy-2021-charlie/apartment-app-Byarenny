@@ -9,9 +9,10 @@ class ApartmentIndex extends Component {
         return (
             <>
                 <h2 className="title">Homes for rent</h2>
-                <div className="body">
+                
                     {this.props.apartments && this.props.apartments.map(apartment => {
                         return (
+                            <div className="body">
                             <Row key={apartment.id}>
                                 <Col sm="6">
                                     <Card body key={apartment.id}>
@@ -28,11 +29,12 @@ class ApartmentIndex extends Component {
                                     </Card>
                                 </Col>
                             </Row>
+                            </div>
                         )
 
                     })}
 
-                </div>
+               
             </>
         )
     }

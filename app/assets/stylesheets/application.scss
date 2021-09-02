@@ -25,11 +25,19 @@
     text-align: left;
   }
 
+  .navheader{
+    text-align: center;
+  }
+
 .body{
   text-align: center;
   display: flex;
   justify-content: space-around;
   
+}
+
+.dogpic{
+  width: 100vw;
 }
 
 .title{
@@ -45,10 +53,11 @@
   margin: 20px;
 }
 
-.navheader{
-    text-align: center;
-  }
+.form{
+  text-align: center;
+}
 
+// Footer //
   footer {
     font-size: 20px;
     color: white;

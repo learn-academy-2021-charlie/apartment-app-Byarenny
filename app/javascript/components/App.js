@@ -9,29 +9,44 @@ import ApartmentEdit from './pages/ApartmentEdit'
 import NotFound from './pages/NotFound'
 
 import {
-  BrowserRouter as  Router,
+  BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom'
 
 class App extends Component {
-    constructor(props){
-      super(props)
-      this.state = {
-        apartments: []
-      }
+  constructor(props) {
+    super(props)
+    this.state = {
+      apartments: []
     }
+  }
 
-    componentDidMount() {
-      this.readApartment()
-    }
-  
-    readApartment = () => {
-      fetch("/apartments")
-        .then(response => response.json())
-        .then(apartmentArray => this.setState({ apartments: apartmentArray }))
-        .catch(errors => console.log("apartment read errors:", errors))
-    }
+  componentDidMount() {
+    this.readApartment()
+  }
+
+  readApartment = () => {
+    fetch("/apartments")
+      .then(response => response.json())
+      .then(apartmentArray => this.setState({ apartments: apartmentArray }))
+      .catch(errors => console.log("apartment read errors:", errors))
+  }
+
+  createApartment = (newApartment) => {
+    console.log(newApartment)
+    fetch("/apartments", {
+      body: JSON.stringify(newApartment),
+      headers: {
+        "content-type": "application/json"
+      },
+      method: "POST"
+    })
+      .then(response => response.json())
+      .then(() => this.readApartment())
+      .catch(errors => console.log("apartment create errors:", errors))
+  }
+
 
   render() {
     const {
@@ -50,18 +65,20 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/apartmentindex" render={(props) => {
             return <ApartmentIndex apartments={this.state.apartments} />
-          }}/>
+          }} />
           <Route path="/apartmentshow/:id" render={(props) => {
             let id = props.match.params.id
             let apartment = this.state.apartments.find(apartment => apartment.id === +id)
             console.log(this.state.apartments)
             return <ApartmentShow apartment={apartment} />
-          }}/>
-          <Route path="/apartmentnew" component={ApartmentNew} />
+          }} />
+          <Route path="/apartmentNew" render={(props) => {
+            return <ApartmentNew createApartment={this.createApartment} current_user={this.props.current_user} />
+          }} />
           <Route path="/apartmentedit" component={ApartmentEdit} />
           <Route component={NotFound} />
         </Switch>
-        <Footer/>
+        <Footer />
       </Router>
     );
   }

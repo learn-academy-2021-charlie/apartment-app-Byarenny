@@ -22,7 +22,7 @@ class Header extends Component {
                   <NavLink href={sign_out_route}>Sign Out</NavLink>
                   <NavLink href="/">Home </NavLink>
                   <NavLink href="/apartmentindex">Listings</NavLink>
-                  {/* <NavLink href="/apartmentnew">Create a listing</NavLink> */}
+                  <NavLink href="/apartmentnew">Create a listing</NavLink>
                 </Nav>
               </div>
             }
