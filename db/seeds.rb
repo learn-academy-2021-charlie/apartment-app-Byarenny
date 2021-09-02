@@ -17,11 +17,11 @@ users = [
 users.each do |attribute|
   User.create attribute
 end
-
+ 
 apartments = [
   {
-    street: '123 Street',
-    city: 'SD',
+    street: '704 Rocky Rd',
+    city: 'San Diego',
     state: 'CA',
     manager: 'Joe',
     email: 'joe@testing.com',
@@ -31,8 +31,8 @@ apartments = [
     pets: 'all pets welcome'
   },
   {
-    street: '456 Street',
-    city: 'SD',
+    street: '202 Butterfly St',
+    city: 'San Diego',
     state: 'CA',
     manager: 'Joe',
     email: 'joe@testing.com',
