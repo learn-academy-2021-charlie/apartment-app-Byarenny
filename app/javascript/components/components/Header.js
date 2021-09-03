@@ -23,6 +23,7 @@ class Header extends Component {
                   <NavLink href="/">Home </NavLink>
                   <NavLink href="/apartmentindex">Listings</NavLink>
                   <NavLink href="/apartmentnew">Create a listing</NavLink>
+                  <NavLink href="/apartmentshow/id">My listings</NavLink>
                 </Nav>
               </div>
             }

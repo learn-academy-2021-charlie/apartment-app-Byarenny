@@ -47,6 +47,32 @@ class App extends Component {
       .catch(errors => console.log("apartment create errors:", errors))
   }
 
+  updateApartment = (editApartment, id) => {
+    fetch(`/apartments/${id}`, {
+      body: JSON.stringify(editApartment),
+      headers: {
+        "content-type": "application/json"
+      },
+      method: "PATCH"
+    })
+      .then(response => response.json())
+      .then(() => this.readApartment())
+      .catch(errors => console.log("apartment update errors: ", errors))
+  }
+
+  deleteApartment = (id) => {
+    fetch(`/apartments/${id}`, {
+      body: JSON.stringify(id),
+      headers: {
+        "content-type": "application/json"
+      },
+      method: "DELETE"
+    })
+      .then(response => response.json())
+      .then(() => this.readApartment())
+      .catch(errors => console.log("apartment delete errors: ", errors))
+  }
+
 
   render() {
     const {
@@ -69,13 +95,20 @@ class App extends Component {
           <Route path="/apartmentshow/:id" render={(props) => {
             let id = props.match.params.id
             let apartment = this.state.apartments.find(apartment => apartment.id === +id)
-            console.log(this.state.apartments)
-            return <ApartmentShow apartment={apartment} />
+            return <ApartmentShow
+              apartment={apartment}
+              current_user={this.props.current_user}
+              deleteApartment={this.deleteApartment} />
           }} />
-          <Route path="/apartmentNew" render={(props) => {
+          <Route path="/apartmentnew" render={(props) => {
             return <ApartmentNew createApartment={this.createApartment} current_user={this.props.current_user} />
           }} />
-          <Route path="/apartmentedit" component={ApartmentEdit} />
+          <Route path="/apartmentedit/:id" render={(props) => {
+            let id = props.match.params.id
+            let apartment = this.state.apartments.find(apartment => apartment.id === +id)
+            return <ApartmentEdit apartment={apartment} updateApartment={this.updateApartment} />
+          }}
+          />
           <Route component={NotFound} />
         </Switch>
         <Footer />
